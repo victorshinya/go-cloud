@@ -1,0 +1,9 @@
+---
+applications:
+- name: go-cloud
+  memory: 128M
+  instances: 1
+  random-route: true
+  env:
+    GOVERSION: go1.10
+    GOPACKAGENAME: github.com/victorshinya/go-cloud
