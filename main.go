@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -8,15 +9,18 @@ import (
 
 var port string
 
-func handleHealthCheck(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(`{ "status": "pass" }`))
+// HealthCheckHandler  A handler for Health Check API
+func HealthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	io.WriteString(w, `{ "status": "pass" }`)
 }
 
 func main() {
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", fs)
 
-	http.HandleFunc("/health", handleHealthCheck)
+	http.HandleFunc("/health", HealthCheckHandler)
 
 	if port = os.Getenv("PORT"); len(port) == 0 {
 		log.Println("PORT not set. Defaulting to 3000")
