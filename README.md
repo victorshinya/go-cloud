@@ -1,6 +1,11 @@
 # Go Cloud
 
+[![IBM Cloud Powered](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://cloud.ibm.com)
+[![Platform](https://img.shields.io/badge/platform-golang-lightgrey.svg?style=flat)](https://developer.ibm.com/?s=golang/)
+
 A Golang boilerplate code to benchmark cloud platforms to host a Go applications.
+
+![Architecture Design](doc/source/images/architecture.jpeg)
 
 ## Deploy
 
