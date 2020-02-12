@@ -3,7 +3,7 @@ applications:
 - name: go-cloud
   memory: 128M
   instances: 1
-  random-route: true
+  buildbacks:
+    - go_buildpack
   env:
-    GOVERSION: go1.10
     GOPACKAGENAME: github.com/victorshinya/go-cloud

@@ -13,3 +13,7 @@
 
 # Vendor folder
 vendor/
+
+# dotenv environment variables file
+.env
+.env.test

@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 var port string
@@ -29,6 +31,6 @@ func main() {
 	log.Println("App is up and running at port " + port)
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
-		log.Println("ListenAndServe: ", err)
+		log.Fatalln("ListenAndServe: ", err)
 	}
 }
