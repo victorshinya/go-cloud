@@ -3,31 +3,35 @@
 [![IBM Cloud Powered](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://cloud.ibm.com)
 [![Platform](https://img.shields.io/badge/platform-golang-lightgrey.svg?style=flat)](https://developer.ibm.com/?s=golang/)
 
-A Golang boilerplate code to benchmark cloud platforms to host a Go applications.
+A Golang boilerplate code to test and benchmark cloud platforms.
 
 ![Architecture Design](doc/source/images/architecture.jpeg)
 
-## Deploy
+## Run locally
 
-Set up [Go](https://golang.org) on your device and run this command. It will automatically check if there is a PORT configured. Otherwhise, it will us `3000` as default PORT.
+First things first, you need to install [Golang](https://golang.org) and quick set up the local environment (your computer), before you run app locally.
 
 ```sh
 go run main.go
 ```
 
-You can deploy on IBM Cloud in two different ways: using Go buildpack (default Golang) or using Static buildpack (NGINX).
+## Deploy the application
 
-### Go
+You can deploy on IBM Cloud in two different ways: using Go buildpack (using the Golang Runtime) or using Static buildpack (which uses [NGINX](https://www.nginx.com)). By default, the IBM Cloud will use Staticfile for cloud environment. If you want to deploy using Golang, use the flag `-b go_buildpack`.
 
-```sh
-ibmcloud app push -b go_buildpack
-```
-
-### Staticfile
+### Go Runtime
 
 ```sh
-ibmcloud app push
+ibmcloud cf push -b go_buildpack
 ```
+
+### Staticfile or NGINX
+
+```sh
+ibmcloud cf push
+```
+
+Or you can use the 1-click deploy button. It will use the platform's DevOps pipeline to build and deploy the app.
 
 Support platforms:
 
@@ -38,4 +42,4 @@ Support platforms:
 
 MIT License
 
-Copyright (c) 2019 Victor Kazuyuki Shinya
+Copyright (c) 2020 Victor Shinya
