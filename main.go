@@ -1,28 +1,21 @@
 package main
 
 import (
-	"io"
 	"log"
 	"net/http"
 	"os"
 
 	_ "github.com/joho/godotenv/autoload"
+	"github.com/victorshinya/go-cloud/internal/health"
 )
 
 var port string
-
-// HealthCheckHandler  A handler for Health Check API
-func HealthCheckHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-	io.WriteString(w, `{ "status": "pass" }`)
-}
 
 func main() {
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", fs)
 
-	http.HandleFunc("/health", HealthCheckHandler)
+	http.HandleFunc("/health", health.HealthCheckHandler)
 
 	if port = os.Getenv("PORT"); len(port) == 0 {
 		log.Println("PORT not set. Defaulting to 3000")

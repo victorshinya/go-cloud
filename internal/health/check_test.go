@@ -1,9 +1,11 @@
-package main
+package health
 
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/victorshinya/go-cloud/internal/health"
 )
 
 func TestHealthCheckHandler(t *testing.T) {
@@ -13,7 +15,7 @@ func TestHealthCheckHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(HealthCheckHandler)
+	handler := http.HandlerFunc(health.HealthCheckHandler)
 	handler.ServeHTTP(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {

@@ -12,8 +12,11 @@
 *.out
 
 # Vendor folder
-vendor/
+# vendor/
 
 # dotenv environment variables file
 .env
 .env.test
+
+# IBM project
+.ibm-project

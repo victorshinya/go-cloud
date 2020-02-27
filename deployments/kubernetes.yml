@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: go-cloud
+    labels:
+        app: go-cloud
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: go-cloud
+    template:
+        metadata:
+            labels:
+                app: go-cloud
+        spec:
+            containers:
+            - name: go-cloud
+              image: us.icr.io/ibmcloudplatformbr/go-cloud:1.0.0
+              imagePullPolicy: Always
+              ports:
+              - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: go-cloud
+    labels:
+        app: go-cloud
+spec:
+    ports:
+        - name: http
+          port: 80
+          targetPort: 3000
+    selector:
+        app: go-cloud
+    type: NodePort
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: go-cloud
+    annotations:
+        ingress.bluemix.net/redirect-to-https: "True"
+spec:
+    tls:
+    - hosts:
+        - <ibm-provided-tls-ingress-subdomain>
+      secretName: <ibm-provided-tls-ingress-secret>
+    rules:
+    - host: <ibm-provided-tls-ingress-subdomain>
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: go-cloud
+            servicePort: 80
