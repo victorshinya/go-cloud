@@ -10,7 +10,7 @@ A Golang boilerplate code to test and benchmark cloud platforms.
 
 ## Run locally
 
-First things first, you need to install [Golang](https://golang.org) and quick set up the local environment (your computer), before you run app locally.
+Before you run the app, you need to install [Golang](https://golang.org) and quick set up the local environment (your computer). Install [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/) if you want to start using the second option (modular and no "works on my machine"). After the installation and set up, you will be able to run the following code:
 
 ### Using Golang CLI
 
@@ -25,9 +25,9 @@ cd deployments
 docker-compose up
 ```
 
-## Deploy the application
+## Deploy the application on IBM Cloud
 
-You can deploy on IBM Cloud in two different ways: using Go buildpack (using the Golang Runtime) or using Static buildpack (which uses [NGINX](https://www.nginx.com)). By default, the IBM Cloud will use Staticfile for cloud environment. If you want to deploy using Golang, use the flag `-b go_buildpack`.
+You can deploy on IBM Cloud in two different ways: using Go buildpack (using the Golang Runtime) or using Static buildpack (which uses [NGINX](https://www.nginx.com)). By default, the IBM Cloud will use Staticfile for cloud environment (because there is a `Staticfile` at the root of the project). If you want to deploy using Golang, use the flag `-b go_buildpack` or `-f deployments/manifest.yml` (which includes the reference to the Golang buildpack).
 
 ### Go Runtime
 
@@ -35,16 +35,15 @@ You can deploy on IBM Cloud in two different ways: using Go buildpack (using the
 ibmcloud cf push -f deployments/manifest.yml
 ```
 
-- `-b` for the Golang Buildpack;
-- `-f` for the `manifest.yml` file path (app environment configuration).
-
-### Staticfile or NGINX
+### Staticfile (or NGINX on IBM Cloud)
 
 ```sh
 ibmcloud cf push
 ```
 
-Or you can use the 1-click deploy button. It will use the platform's DevOps pipeline to build and deploy the app.
+### 1-Click deploy
+
+Also you can use the 1-click deploy button. It will use the platform's DevOps pipeline to build and deploy the app.
 
 Support platforms:
 
