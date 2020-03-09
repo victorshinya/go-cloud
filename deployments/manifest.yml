@@ -1,6 +1,7 @@
 ---
 applications:
 - name: go-cloud
+  random-route: true
   memory: 128M
   instances: 1
   buildbacks:
