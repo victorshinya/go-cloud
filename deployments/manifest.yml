@@ -1,9 +1,9 @@
 ---
 applications:
-- name: go-cloud
-  random-route: true
-  memory: 128M
-  instances: 1
+- name: gocloud
+  memory: 64M
+  instances: 3
+  disk_quota: 64M
   buildbacks:
     - go_buildpack
   env:
