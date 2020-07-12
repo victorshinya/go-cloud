@@ -20,3 +20,6 @@
 
 # IBM project
 .ibm-project
+
+# Air Live Reload
+tmp/
