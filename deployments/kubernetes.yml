@@ -17,7 +17,7 @@ spec:
         spec:
             containers:
             - name: go-cloud
-              image: us.icr.io/ibmcloudplatformbr/go-cloud:1.0.0
+              image: victorshinya/go-cloud:latest
               imagePullPolicy: Always
               ports:
               - containerPort: 3000
@@ -37,24 +37,3 @@ spec:
     selector:
         app: go-cloud
     type: NodePort
-
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-    name: go-cloud
-    annotations:
-        ingress.bluemix.net/redirect-to-https: "True"
-spec:
-    tls:
-    - hosts:
-        - <ibm-provided-tls-ingress-subdomain>
-      secretName: <ibm-provided-tls-ingress-secret>
-    rules:
-    - host: <ibm-provided-tls-ingress-subdomain>
-      http:
-        paths:
-        - path: /
-          backend:
-            serviceName: go-cloud
-            servicePort: 80
