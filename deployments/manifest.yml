@@ -6,5 +6,4 @@ applications:
   disk_quota: 64M
   buildbacks:
     - go_buildpack
-  env:
-    GOPACKAGENAME: github.com/victorshinya/go-cloud
+  path: ../
