@@ -1,11 +1,9 @@
-package health
+package main
 
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/victorshinya/go-cloud/internal/health"
 )
 
 func TestHealthCheckHandler(t *testing.T) {
@@ -15,14 +13,14 @@ func TestHealthCheckHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(health.HealthCheckHandler)
+	handler := http.HandlerFunc(HealthCheckHandler)
 	handler.ServeHTTP(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
 	}
 
-	expected := `{ "status": "pass" }`
+	expected := `{ "status": "UP" }`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
 	}

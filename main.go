@@ -1,12 +1,12 @@
 package main
 
 import (
+	"io"
 	"log"
 	"net/http"
 	"os"
 
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/victorshinya/go-cloud/internal/health"
 )
 
 var port string
@@ -15,7 +15,7 @@ func main() {
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", fs)
 
-	http.HandleFunc("/health", health.HealthCheckHandler)
+	http.HandleFunc("/health", HealthCheckHandler)
 
 	if port = os.Getenv("PORT"); len(port) == 0 {
 		log.Println("PORT not set. Defaulting to 3000")
@@ -26,4 +26,11 @@ func main() {
 	if err != nil {
 		log.Fatalln("ListenAndServe: ", err)
 	}
+}
+
+// HealthCheckHandler returns a status message whether the server is up or down
+func HealthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	io.WriteString(w, `{ "status": "UP" }`)
 }
