@@ -1,14 +1,12 @@
 # Build process
-FROM golang as build
+FROM golang:1.16-alpine
 
-WORKDIR /go/src/github.com/victorshinya/go-cloud
+WORKDIR /app
+
 COPY . .
-RUN go get -d -v ./...
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
-# Expose service
-FROM alpine
+RUN go build -o main .
 
-COPY --from=build /go/src/github.com/victorshinya/go-cloud .
-EXPOSE 3000
-ENTRYPOINT [ "./app" ]
+EXPOSE 8080
+
+CMD [ "./main" ]

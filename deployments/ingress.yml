@@ -1,20 +1,23 @@
 ---
-  apiVersion: extensions/v1beta1
+  apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-      name: go-cloud
+      name: ingress
       annotations:
-          ingress.bluemix.net/redirect-to-https: "True"
+          kubernetes.io/ingress.class: "public-iks-k8s-nginx"
   spec:
       tls:
       - hosts:
-          - <ibm-provided-tls-ingress-subdomain>
-        secretName: <ibm-provided-tls-ingress-secret>
+        - <ibm-provided-tls-ingress-subdomain>
+        secretName: secret-tls
       rules:
       - host: <ibm-provided-tls-ingress-subdomain>
         http:
           paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: go-cloud
-              servicePort: 80
+              service:
+                name: frontend
+                port:
+                  number: 80

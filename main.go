@@ -5,8 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-
-	_ "github.com/joho/godotenv/autoload"
 )
 
 var port string
@@ -18,8 +16,8 @@ func main() {
 	http.HandleFunc("/health", HealthCheckHandler)
 
 	if port = os.Getenv("PORT"); len(port) == 0 {
-		log.Println("PORT not set. Defaulting to 3000")
-		port = "3000"
+		log.Println("PORT not set. Defaulting to 8080")
+		port = "8080"
 	}
 	log.Println("App is up and running at port " + port)
 	err := http.ListenAndServe(":"+port, nil)
