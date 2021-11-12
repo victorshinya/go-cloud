@@ -1,5 +1,7 @@
 # Go Cloud
 
+DEMO2WIN
+
 [![IBM Cloud Powered](https://img.shields.io/badge/IBM%20Cloud-powered-blue.svg)](https://cloud.ibm.com)
 [![Platform](https://img.shields.io/badge/platform-golang-lightgrey.svg?style=flat)](https://developer.ibm.com/?s=golang/)
 [![Go Report Card](https://goreportcard.com/badge/github.com/victorshinya/go-cloud)](https://goreportcard.com/report/github.com/victorshinya/go-cloud)
